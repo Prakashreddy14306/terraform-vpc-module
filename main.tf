@@ -2,7 +2,7 @@ resource "aws_vpc" "main" {
   cidr_block       = var.vpc_cidr
   enable_dns_hostnames = var.enable_dns_hostnames
   instance_tenancy = "default"
-
+  
   # expense-dev
   tags = merge(
     var.common_tags,
@@ -91,7 +91,7 @@ resource "aws_nat_gateway" "example" {
     }
   )
 
-  # To ensure proper ordering, it is recommended to add an explicit dependency
+  # To ensure proper ordering, it is recommended to add an explicit dependency is managed automatically by Terraform, but in some cases, you may need to add an explicit dependency on the Internet Gateway resource to ensure that the NAT Gateway is created after the Internet Gateway is available. This can be done using the depends_on argument, which specifies that the NAT Gateway resource depends on the creation of the Internet Gateway resource. This ensures that the NAT Gateway is created only after the Internet Gateway is available, preventing any potential issues with routing traffic through the NAT Gateway before the Internet Gateway is ready. 
   # on the Internet Gateway for the VPC.
   depends_on = [aws_internet_gateway.main]
 }
