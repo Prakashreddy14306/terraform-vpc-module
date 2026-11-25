@@ -13,3 +13,8 @@ data "aws_route_table" "main" {
     values = ["true"]
   }
 }
+
+# data "subnet_ids" "default" {
+#   vpc_id = local.default_vpc_id
+# }
+
